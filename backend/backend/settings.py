@@ -54,6 +54,8 @@ MIDDLEWARE = [
 ]
 
 CORS_ALLOW_ALL_ORIGINS=True
+#CORS_ALLOW_ORIGINS=['http://localhost:3000/*', 'http://localhost:8000/*']
+
 
 ROOT_URLCONF = "backend.urls"
 
@@ -85,7 +87,7 @@ DATABASES = {
         'NAME': 'postgres',
         'USER': 'postgres',
         'PASSWORD': 'postgres',
-        'HOST': 'db',
+        'HOST': 'fullstackdemo.pgdb.local',
         'PORT': '5432',
     }
 }

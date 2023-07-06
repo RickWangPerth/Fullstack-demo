@@ -5,8 +5,9 @@ services:
   db:
     image: postgres:14-alpine
     ports:
-      - '5432:5432'
-
+      - '5431:5432'
+    # expose:
+    #   - '5431'
     environment:
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_USER=postgres
@@ -14,6 +15,11 @@ services:
 
     volumes:
       - ./data/db:/var/lib/postgresql/data/
+
+    networks:
+      fullstackdemo:
+        aliases:
+          - fullstackdemo.pgdb.local
 
   frontend:
     build:
@@ -29,11 +35,10 @@ services:
     depends_on:
       - backend
 
-    x-develop:
-      watch:
-        - action: sync
-          path: ./frontend
-          target: /app/frontend
+    networks:
+      fullstackdemo:
+        aliases:
+          - fullstackdemo-react.local
 
   backend: 
     build: 
@@ -53,10 +58,11 @@ services:
 
     depends_on:
       - db
+      
+    networks:
+      fullstackdemo:
+        aliases:
+          - fullstackdemo-django.local
 
-    x-develop:
-      watch:
-        - action: rebuild
-          path: ./backend
-          target: /app/backend
-
+networks:
+  fullstackdemo:
