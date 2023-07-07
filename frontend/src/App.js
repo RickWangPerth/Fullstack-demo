@@ -1,26 +1,21 @@
-import logo from './logo.svg';
+
 import './App.css';
-import {useState, useEffect} from 'react';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { Login } from "./components/login";
+import { Home } from "./components/home";
+import { Navigation } from './components/navigation';
+import { Logout } from './components/logout';
 
 function App() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    fetch('http://localhost:8000/test/')
-      .then(res => res.json())
-      .then(data => setData(data.data));
-  })
-
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <h1>An Awesome Blog </h1>
-        <h3>On Django, React, Postgres, and Docker </h3>
-
-        <p>{data}</p>
-      </header>
-    </div>
+    <BrowserRouter>
+      <Navigation />
+      {/* <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/logout" element={<Logout />} />
+      </Routes> */}
+    </BrowserRouter>
   );
 }
 
